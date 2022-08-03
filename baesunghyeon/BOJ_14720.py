@@ -12,4 +12,5 @@ for shop in milk_shops:
       milk = 0
 print(count_milk)
 
-  
+#
+
