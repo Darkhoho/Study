@@ -1,15 +1,22 @@
+# 가게의 수
 N = int(input())
-hights = list(map(int,input().split()))
-
-result = 0
-tmp = 0
-for i in range(N-1):
-    if hights[i] < hights[i+1]:
-        tmp += hights[i+1]-hights[i]
-        if i == N-2:
-            result = max(tmp,result)
-    else:
-        result = max(tmp,result)
-        tmp = 0
-
-print(result)
+# 가게 리스트
+milk_lst = list(map(int,input().split()))
+# 전에 먹은 우유
+drink = 2
+# 먹은 숫자
+cnt = 0
+for i in milk_lst:
+    # 전에 먹은게 바나나고 딸기를 만나면
+    if drink == 2 and i == 0:
+        drink = i
+        cnt += 1
+    # 초코먹고 바나나
+    if drink == 1 and i == 2:
+        drink = i
+        cnt += 1
+    # 딸기먹고 초코
+    if drink == 0 and i == 1:
+        drink = i
+        cnt += 1
+print(cnt)
