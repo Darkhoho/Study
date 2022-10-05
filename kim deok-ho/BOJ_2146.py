@@ -26,7 +26,7 @@ def find(r, c):
         if nr < 0 or nr >= N or nc < 0 or nc >= N:
             continue
         if arr[nr][nc] != 0:
-            near = arr[nr][nc]
+            near = arr[nr][nc]              # 몇 번 대륙이랑 현재 붙어서 시작하는지 찾기
             break
     visited = [[0]*N for _ in range(N)]
     q = deque()
@@ -44,20 +44,20 @@ def find(r, c):
             if arr[nr][nc] == 0:
                 q.append((nr, nc))
                 visited[nr][nc] = visited[r][c] + 1
-            elif arr[nr][nc] != near:
+            elif arr[nr][nc] != near:                   # 붙어있던 대륙이 아니라 다른 대륙이면 다른 대륙과 이어진것
                 ans = min(ans, visited[r][c])
                 return
 
 N = int(input())
 arr = [list(map(int, input().split())) for _ in range(N)]
 check = 2
-checkPosition = set()
+checkPosition = set()           # 대륙에 붙어있는 바다
 for r in range(N):
     for c in range(N):
         if arr[r][c] == 1:
-            bfs(r, c, check)
+            bfs(r, c, check)    # 대륙에 번호 붙이기
             check += 1
 ans = N*N
-for r, c in checkPosition:
+for r, c in checkPosition:      # 대륙에 붙어있는 바다에서 bfs 돌려서 다른 대륙에 도착하는 최소 거리 찾기
     find(r, c)
 print(ans)
